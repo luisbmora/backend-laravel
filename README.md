@@ -1,66 +1,176 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 API RESTful de Productos con Laravel 10
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una API RESTful construida con **Laravel 10** que permite realizar operaciones CRUD sobre productos.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Características
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- CRUD de productos (`GET`, POST, PUT, DELETE)
+- Uso de **Eloquent ORM**
+- Validaciones de datos en el controlador
+- **Paginación** en la lista de productos
+- **Seeder y Factory** para poblar la base de datos
+- Documentación con **Swagger (L5 Swagger)**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Instalación y Configuración
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1️⃣ Clonar el repositorio
+```bash
+git clone https://github.com/tu-usuario/api-productos.git
+cd api-productos
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 2️⃣ Instalar dependencias
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3️⃣ Configurar variables de entorno
+Copia el archivo `.env.example` y renómbralo a `.env`:
+```bash
+cp .env.example .env
+```
 
-## Laravel Sponsors
+Luego, edita `.env` y configura la conexión a tu base de datos:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=api_productos
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 4️⃣ Generar la clave de la aplicación
+```bash
+php artisan key:generate
+```
 
-### Premium Partners
+### 5️⃣ Ejecutar migraciones y seeders
+```bash
+php artisan migrate --seed
+```
+Esto creará la tabla `products` y llenará la base de datos con datos de prueba.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 6️⃣ Levantar el servidor
+```bash
+php artisan serve
+```
+El servidor estará disponible en: 📌 **http://127.0.0.1:8000**
 
-## Contributing
+## 📌 Rutas API
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/api/products` | Obtener todos los productos (paginados) |
+| `POST` | `/api/products` | Crear un nuevo producto |
+| `GET` | `/api/products/{id}` | Obtener un producto por ID |
+| `PUT` | `/api/products/{id}` | Actualizar un producto |
+| `DELETE` | `/api/products/{id}` | Eliminar un producto |
 
-## Code of Conduct
+## 🛠 Uso con Postman
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 📍 Obtener todos los productos
+**Método:** `GET`
+**URL:** `http://127.0.0.1:8000/api/products`
 
-## Security Vulnerabilities
+### 📍 Crear un producto
+**Método:** `POST`
+**URL:** `http://127.0.0.1:8000/api/products`
+**Body (JSON, raw en Postman):**
+```json
+{
+  "name": "Laptop",
+  "description": "Laptop gamer de alto rendimiento",
+  "price": 1500.99
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 📍 Obtener un producto por ID
+**Método:** `GET`
+**URL:** `http://127.0.0.1:8000/api/products/1`
 
-## License
+### 📍 Actualizar un producto
+**Método:** `PUT`
+**URL:** `http://127.0.0.1:8000/api/products/1`
+**Body (JSON, raw en Postman):**
+```json
+{
+  "name": "Laptop Pro",
+  "price": 1800.99
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 📍 Eliminar un producto
+**Método:** `DELETE`
+**URL:** `http://127.0.0.1:8000/api/products/1`
+
+## 📖 Documentación con Swagger
+
+Este proyecto incluye documentación automática con **Swagger**.
+
+### 1️⃣ Instalar Swagger (si no está instalado)
+```bash
+composer require "darkaonline/l5-swagger"
+```
+
+### 2️⃣ Publicar configuración
+```bash
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+```
+
+### 3️⃣ Generar la documentación
+```bash
+php artisan l5-swagger:generate
+```
+
+### 4️⃣ Acceder a la documentación
+La documentación estará disponible en: 📌 **http://127.0.0.1:8000/api/documentation**
+
+## 🏗️ Estructura del Proyecto
+
+```
+api-productos/
+│── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── ProductController.php
+│   ├── Models/
+│   │   ├── Product.php
+│── database/
+│   ├── factories/
+│   │   ├── ProductFactory.php
+│   ├── migrations/
+│   │   ├── create_products_table.php
+│   ├── seeders/
+│   │   ├── ProductSeeder.php
+│── routes/
+│   ├── api.php
+│── .env
+│── composer.json
+│── README.md
+```
+
+## 📌 Generar datos de prueba
+
+Si necesitas poblar la base de datos con datos falsos, puedes usar el siguiente comando:
+```bash
+php artisan db:seed --class=ProductSeeder
+```
+
+## 🛠 Comandos Útiles
+
+| Comando | Descripción |
+|---------|-------------|
+| `php artisan migrate` | Ejecutar migraciones |
+| `php artisan migrate:refresh --seed` | Resetear BD y volver a poblarla |
+| `php artisan db:seed` | Ejecutar los seeders |
+| `php artisan route:list` | Ver todas las rutas registradas |
+| `php artisan serve` | Levantar el servidor de desarrollo |
+
+## 📜 Licencia
+
+Este proyecto está bajo la licencia **MIT**.
